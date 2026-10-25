@@ -29,7 +29,7 @@ See [group_BenTucker.txt](group_BenTucker.txt).
 |---|---|
 | Maarek Udemy, Section 3 (no quiz) | |
 | Maarek Udemy, Section 5 + quiz | ✅ 12/12 |
-| Maarek Udemy, Section 6 + quiz | |
+| Maarek Udemy, Section 6 + quiz | ✅ 5/5 |
 | YouTube: EC2 Instance Types | |
 | YouTube: Git Bash, Bash Basics | |
 | YouTube: Git Tutorial for Beginners | |
