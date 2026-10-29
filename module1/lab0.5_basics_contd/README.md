@@ -10,7 +10,7 @@ See [group_BenTucker.txt](group_BenTucker.txt).
 | | |
 |---|---|
 | Spotter | Richie Bias |
-| Teammates | Ben Tucker, Richie Bias, Kenneth Phillips, Dwayne Simone |
+| Teammates | Ben Tucker, Richie Bias, Kenneth Phillips, Dwayne Simone, Bakari Woods |
 | Meeting days + times | Mondays & Wednesdays, 7:00–8:30 PM CT |
 
 ## Reading
