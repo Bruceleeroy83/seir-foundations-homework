@@ -44,6 +44,14 @@ See [group_BenTucker.txt](group_BenTucker.txt).
 
 | Item | Requirement | Screenshot | Done? |
 |---|---|---|---|
-| BAM_1.1 | Local SSH client; `whoami` + `date` visible | `screenshots/BAM_1.1.jpg` | No |
-| BAM_1.2 | Custom page: thank-you line, dollar line, picture | `screenshots/BAM_1.2.jpg` | No |
-| BAM_1.3 | Local SSH; `user_data` script displayed with `cat` | `screenshots/BAM_1.3.jpg` | No |
+| BAM_1.1 | Local SSH client; `whoami` + `date` visible | `screenshots/BAM_1.1.jpg` | Yes |
+| BAM_1.2 | Custom page: thank-you line, dollar line, picture | `screenshots/BAM_1.2.jpg` | Yes |
+| BAM_1.3 | Local SSH; `user_data` script displayed with `cat` | `screenshots/BAM_1.3.jpg` | Yes |
+
+### BAM screenshots
+
+![BAM_1.1 local SSH whoami + date](screenshots/BAM_1.1.jpg)
+
+![BAM_1.2 customized EC2 web page](screenshots/BAM_1.2.jpg)
+
+![BAM_1.3 user_data script over local SSH](screenshots/BAM_1.3.jpg)
