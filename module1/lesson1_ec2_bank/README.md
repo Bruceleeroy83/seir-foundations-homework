@@ -25,7 +25,7 @@ Security group: SSH 22 (my IP + EC2 Instance Connect prefix list), HTTP 80, Cust
 | 1 | 10/28 | 93 min | t3.micro | Mac SSH | ✅ SWIFT 9 posted / 1 rejected / **0 failed**, /ask 200, terminated | Control + C in Window 1 stopped the bank · typed `127.0.0.1` in Chrome (only works inside the server) · ran `ssh` while already inside |
 | 2 | 10/28 | 98 min | **t3.small** | **Instance Connect** | ✅ SWIFT 7 / 3 / **0 failed**, port 80 + 8000 from outside, /ask 200, terminated | Added the Instance Connect prefix list to my SG · first launch was t3.micro with no name, so I relaunched · bank stopped when I left the Window 1 tab |
 | 3 | 10/29 | 162 min (incl. Lab 0.5 BAM) | t3.small | Mac SSH | ✅ SWIFT ran, /docs + /ask 200 from outside, terminated | Launch right the first time (name + t3.small) · learned `date` is a command · `curl 127.0.0.1` only works on the server · used `scp` to copy a file to the server |
-| 4 | | | | | | |
+| 4 | 10/30 | **34 min** 🚀 | t3.small | Mac SSH | ✅ SWIFT 7 / 3 / **0 failed**, /docs + /ask 200 from outside, terminated | Smooth run, no mistakes. Launch right the first time, waited for the server prompt before each command |
 | 5 | | | | | | |
 | 6 | | | | | | |
 | 7 | | | | | | |
@@ -41,6 +41,13 @@ Security group: SSH 22 (my IP + EC2 Instance Connect prefix list), HTTP 80, Cust
 ### Deploy 3
 ![/docs from outside on port 8000](screenshots/rep3/rep3-port8000-docs.png)
 ![/ask Code 200](screenshots/rep3/rep3-ask-200.png)
+
+### Deploy 4
+![SSH login from my Mac](screenshots/rep4/rep4-ssh-login.png)
+SWIFT report: [rep4-swift-report.txt](screenshots/rep4/rep4-swift-report.txt) (Sent 10 · POSTED 7 · REJECTED 3 · **FAILED 0**)
+![/docs from outside on port 8000](screenshots/rep4/rep4-port8000-docs.png)
+![/ask Code 200](screenshots/rep4/rep4-ask-200.png)
+![Terminated](screenshots/rep4/rep4-terminated.png)
 
 Deploy 3 also produced my Lab 0.5 extra credit: see [`../lab0.5_basics_contd/`](../lab0.5_basics_contd/).
 
