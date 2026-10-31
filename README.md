@@ -6,3 +6,4 @@ GitHub: Bruceleeroy83
 |---|---|---|
 | 1 | Lab 0: Three EC2 deployments | [module1/lab0_basics](module1/lab0_basics) |
 | 1 | Lab 0.5: Basics continued | [module1/lab0.5_basics_contd](module1/lab0.5_basics_contd) |
+| 1 | Lesson 1: Balerica Legacy Bank on EC2 | [module1/lesson1_ec2](module1/lesson1_ec2) |

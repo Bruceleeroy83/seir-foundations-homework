@@ -1,66 +1,37 @@
-# Module 1, Lesson 1: Balerica Legacy Bank, 7 Deploys
+# Module 1, Lesson 1: Balerica Legacy Bank on EC2
 
 **Student:** Ben Tucker (Bruceleeroy83)
-**Assignment:** Deploy the Balerica Legacy Bank (FastAPI + COBOL core) on EC2 **7 times from scratch**, with notes for each deploy.
 **Runbook:** [BalericaAI/SEIR-Foundations, module1/lesson1_ec2/API/runbook.md](https://github.com/BalericaAI/SEIR-Foundations/blob/main/module1/lesson1_ec2/API/runbook.md)
 
-## How each deploy goes
+Each run is a brand-new t3.small instance in us-east-1, with Steps 0–4 done by hand. The ID line runs right before uvicorn, and every instance is terminated after its run.
 
-1. **Launch** from my launch template in **us-east-1 (N. Virginia)**, instance type **t3.small** (2 GB memory), Name tag `bank-repN-date`
-2. **Connect**: EC2 Instance Connect or SSH from my Mac
-3. **Build**: `sudo dnf install -y git` → `git clone` the course repo → run `install.sh`
-4. **Test the COBOL core**: `account_lookup 100001` (return code 0), `account_lookup 999999` (return code 4), `payment_post` → `POSTED`
-5. **Start the API** (Window 1): `source venv/bin/activate` → `uvicorn app.main:app --host 0.0.0.0 --port 8000`
-6. **Be the customer** (Window 2): `curl http://127.0.0.1:8000/status` → `python3 swift/traffic_generator.py --count 10` → **FAILED : 0**, CONNECTIVITY CONFIRMED
-7. **From outside**: `http://<public DNS>` (port 80) and `http://<public DNS>:8000/docs` → **POST /ask** → Code 200
-8. **Terminate** the instance and check that nothing is left running
+## Lab runs
 
-Security group: SSH 22 (my IP + EC2 Instance Connect prefix list), HTTP 80, Custom TCP 8000 (my IP).
+| Run | Date | Time zone | Instance ID | Boot time (UTC) | Public IPv4 DNS | Screenshot | Terminated? |
+|---|---|---|---|---|---|---|---|
+| 1 | 2026-10-30 | America/Denver | i-007852c4250891a7b | 2026-10-31 01:05:54 | ec2-32-201-83-46.compute-1.amazonaws.com | [lab1_run1.jpg](screenshots/lab1_run1.jpg) | Yes |
+| 2 | 2026-10-30 | America/Denver | i-0436e11348ec308a8 | 2026-10-31 01:31:00 | ec2-174-129-155-38.compute-1.amazonaws.com | [lab1_run2.jpg](screenshots/lab1_run2.jpg) | Yes |
+| 3 | 2026-10-30 | America/Denver | i-062a1c9de9b6caa3c | 2026-10-31 01:46:36 | ec2-23-22-179-201.compute-1.amazonaws.com | [lab1_run3.jpg](screenshots/lab1_run3.jpg) | Yes |
+| 4 | 2026-10-31 | America/Denver | i-06f264cfbfa19000e | 2026-10-31 17:02:21 | ec2-3-80-51-178.compute-1.amazonaws.com | [lab1_run4.jpg](screenshots/lab1_run4.jpg) | Yes |
+| 5 | | | | | | | |
+| 6 | | | | | | | |
+| 7 | | | | | | | |
 
-## Deploy log
+## COBOL core practice
 
-| # | Date | Time | Instance | Connect | Result | What broke / what I fixed |
-|---|---|---|---|---|---|---|
-| 0 | 10/27 | ~120 min (class) | t3.micro | Mac SSH | ✅ CONNECTIVITY CONFIRMED, /ask 200, terminated | git wasn't installed on the server, stray backtick (`bquote>`), forgot `cd`, Window 1 closed, JSON body on /ask |
-| 1 | 10/28 | 93 min | t3.micro | Mac SSH | ✅ SWIFT 9 posted / 1 rejected / **0 failed**, /ask 200, terminated | Control + C in Window 1 stopped the bank · typed `127.0.0.1` in Chrome (only works inside the server) · ran `ssh` while already inside |
-| 2 | 10/28 | 98 min | **t3.small** | **Instance Connect** | ✅ SWIFT 7 / 3 / **0 failed**, port 80 + 8000 from outside, /ask 200, terminated | Added the Instance Connect prefix list to my SG · first launch was t3.micro with no name, so I relaunched · bank stopped when I left the Window 1 tab |
-| 3 | 10/29 | 162 min (incl. Lab 0.5 BAM) | t3.small | Mac SSH | ✅ SWIFT ran, /docs + /ask 200 from outside, terminated | Launch right the first time (name + t3.small) · learned `date` is a command · `curl 127.0.0.1` only works on the server · used `scp` to copy a file to the server |
-| 4 | 10/30 | **34 min** 🚀 | t3.small | Mac SSH | ✅ SWIFT 7 / 3 / **0 failed**, /docs + /ask 200 from outside, terminated | Smooth run, no mistakes. Launch right the first time, waited for the server prompt before each command |
-| 5 | 10/30 | **~30 min** 🚀 | t3.small | Mac SSH | ✅ SWIFT 8 / 2 / **0 failed**, /docs + /ask 200 from outside, terminated | Name tag reused the Rep 4 name, fixed to `bank-rep5-1030` · learned Tab 2 (customer) opens only after the bank is running in Tab 1 |
-| 6 | | | | | | |
-| 7 | | | | | | |
+Done on Run 3 (`i-062a1c9de9b6caa3c`) in `/opt/balerica-bank`. Details are in `lab1_notes.md`.
 
-## Screenshots
+| Screenshot | What it shows |
+|---|---|
+| [cobol_rc0.jpg](screenshots/cobol_rc0.jpg) | RC 0: `account_lookup 100001` found Alice Johnson |
+| [cobol_rc4.jpg](screenshots/cobol_rc4.jpg) | RC 4: `account_lookup 999999`, ACCOUNT NOT FOUND |
+| [cobol_rc8.jpg](screenshots/cobol_rc8.jpg) | RC 8: `payment_post TXN-BT-0004` for 0.00, REJECTED |
+| [cobol_rc12.jpg](screenshots/cobol_rc12.jpg) | RC 12: ran from the wrong folder, CANNOT OPEN data/accounts.dat |
+| [cobol_ledger_decode.jpg](screenshots/cobol_ledger_decode.jpg) | Alice's balance decoded with `cut -c45-56` |
 
-### Deploy 2
-![Port 80 web page](screenshots/rep2/rep2-port80-web-page.png)
-![SWIFT traffic report, FAILED 0](screenshots/rep2/rep2-swift-report.png)
-![/docs from outside on port 8000](screenshots/rep2/rep2-port8000-docs.png)
-![/ask Code 200](screenshots/rep2/rep2-ask-200.png)
+## Git
 
-### Deploy 3
-![/docs from outside on port 8000](screenshots/rep3/rep3-port8000-docs.png)
-![/ask Code 200](screenshots/rep3/rep3-ask-200.png)
-
-### Deploy 4
-![SSH login from my Mac](screenshots/rep4/rep4-ssh-login.png)
-SWIFT report: [rep4-swift-report.txt](screenshots/rep4/rep4-swift-report.txt) (Sent 10 · POSTED 7 · REJECTED 3 · **FAILED 0**)
-![/docs from outside on port 8000](screenshots/rep4/rep4-port8000-docs.png)
-![/ask Code 200](screenshots/rep4/rep4-ask-200.png)
-![Terminated](screenshots/rep4/rep4-terminated.png)
-
-### Deploy 5
-![SSH login from my Mac](screenshots/rep5/rep5-ssh-login.png)
-![SWIFT traffic report, FAILED 0](screenshots/rep5/rep5-swift-report.png)
-![/docs from outside on port 8000](screenshots/rep5/rep5-port8000-docs.png)
-![/ask Code 200](screenshots/rep5/rep5-ask-200.png)
-![Terminated](screenshots/rep5/rep5-terminated.png)
-
-Deploy 3 also produced my Lab 0.5 extra credit: see [`../lab0.5_basics_contd/`](../lab0.5_basics_contd/).
-
-## Why `/ask` says `offline-knowledge-base`
-
-Amazon Bedrock needs an IAM role on the instance (instructor-created), `AWS_REGION` set to where model access is enabled, and a real `BEDROCK_MODEL_ID`. Without the role, `/ask` still answers with Code 200 from its built-in notes. That's expected for now.
+[git_clone.jpg](screenshots/git_clone.jpg): cloned this repo onto Run 3 and listed `module1`. Clone only, no push and no token on the server.
 
 ## My notes
 
