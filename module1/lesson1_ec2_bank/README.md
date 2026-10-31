@@ -26,7 +26,7 @@ Security group: SSH 22 (my IP + EC2 Instance Connect prefix list), HTTP 80, Cust
 | 2 | 10/28 | 98 min | **t3.small** | **Instance Connect** | ✅ SWIFT 7 / 3 / **0 failed**, port 80 + 8000 from outside, /ask 200, terminated | Added the Instance Connect prefix list to my SG · first launch was t3.micro with no name, so I relaunched · bank stopped when I left the Window 1 tab |
 | 3 | 10/29 | 162 min (incl. Lab 0.5 BAM) | t3.small | Mac SSH | ✅ SWIFT ran, /docs + /ask 200 from outside, terminated | Launch right the first time (name + t3.small) · learned `date` is a command · `curl 127.0.0.1` only works on the server · used `scp` to copy a file to the server |
 | 4 | 10/30 | **34 min** 🚀 | t3.small | Mac SSH | ✅ SWIFT 7 / 3 / **0 failed**, /docs + /ask 200 from outside, terminated | Smooth run, no mistakes. Launch right the first time, waited for the server prompt before each command |
-| 5 | | | | | | |
+| 5 | 10/30 | **~30 min** 🚀 | t3.small | Mac SSH | ✅ SWIFT 8 / 2 / **0 failed**, /docs + /ask 200 from outside, terminated | Name tag reused the Rep 4 name, fixed to `bank-rep5-1030` · learned Tab 2 (customer) opens only after the bank is running in Tab 1 |
 | 6 | | | | | | |
 | 7 | | | | | | |
 
@@ -48,6 +48,13 @@ SWIFT report: [rep4-swift-report.txt](screenshots/rep4/rep4-swift-report.txt) (S
 ![/docs from outside on port 8000](screenshots/rep4/rep4-port8000-docs.png)
 ![/ask Code 200](screenshots/rep4/rep4-ask-200.png)
 ![Terminated](screenshots/rep4/rep4-terminated.png)
+
+### Deploy 5
+![SSH login from my Mac](screenshots/rep5/rep5-ssh-login.png)
+![SWIFT traffic report, FAILED 0](screenshots/rep5/rep5-swift-report.png)
+![/docs from outside on port 8000](screenshots/rep5/rep5-port8000-docs.png)
+![/ask Code 200](screenshots/rep5/rep5-ask-200.png)
+![Terminated](screenshots/rep5/rep5-terminated.png)
 
 Deploy 3 also produced my Lab 0.5 extra credit: see [`../lab0.5_basics_contd/`](../lab0.5_basics_contd/).
 
