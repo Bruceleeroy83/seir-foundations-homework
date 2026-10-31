@@ -13,7 +13,7 @@ Each run is a brand-new t3.small instance in us-east-1, with Steps 0–4 done by
 | 2 | 2026-10-30 | America/Denver | i-0436e11348ec308a8 | 2026-10-31 01:31:00 | ec2-174-129-155-38.compute-1.amazonaws.com | [lab1_run2.jpg](screenshots/lab1_run2.jpg) | Yes |
 | 3 | 2026-10-30 | America/Denver | i-062a1c9de9b6caa3c | 2026-10-31 01:46:36 | ec2-23-22-179-201.compute-1.amazonaws.com | [lab1_run3.jpg](screenshots/lab1_run3.jpg) | Yes |
 | 4 | 2026-10-31 | America/Denver | i-06f264cfbfa19000e | 2026-10-31 17:02:21 | ec2-3-80-51-178.compute-1.amazonaws.com | [lab1_run4.jpg](screenshots/lab1_run4.jpg) | Yes |
-| 5 | | | | | | | |
+| 5 | 2026-10-31 | America/Denver | i-0e7af006c53f26971 | 2026-10-31 18:48:47 | ec2-54-234-28-157.compute-1.amazonaws.com | [lab1_run5.jpg](screenshots/lab1_run5.jpg) | Yes |
 | 6 | | | | | | | |
 | 7 | | | | | | | |
 
