@@ -15,7 +15,7 @@ Each run is a brand-new t3.small instance in us-east-1, with Steps 0–4 done by
 | 4 | 2026-10-31 | America/Denver | i-06f264cfbfa19000e | 2026-10-31 17:02:21 | ec2-3-80-51-178.compute-1.amazonaws.com | [lab1_run4.jpg](screenshots/lab1_run4.jpg) | Yes |
 | 5 | 2026-10-31 | America/Denver | i-0e7af006c53f26971 | 2026-10-31 18:48:47 | ec2-54-234-28-157.compute-1.amazonaws.com | [lab1_run5.jpg](screenshots/lab1_run5.jpg) | Yes |
 | 6 | 2026-10-31 | America/Denver | i-0d97cc1cfb2b765cb | 2026-11-01 02:15:15 | ec2-54-159-63-55.compute-1.amazonaws.com | [lab1_run6.jpg](screenshots/lab1_run6.jpg) | Yes |
-| 7 | | | | | | | |
+| 7 | 2026-11-02 | America/Denver | i-0408dca3d830ebca6 | 2026-11-03 02:16:14 | ec2-54-167-30-179.compute-1.amazonaws.com | [lab1_run7.jpg](screenshots/lab1_run7.jpg) | Yes |
 
 ## COBOL core practice
 
