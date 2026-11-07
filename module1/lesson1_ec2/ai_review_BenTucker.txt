@@ -1,0 +1,59 @@
+AI Review - Lesson 1 Runbook - Ben Tucker
+=========================================
+
+AI used: Claude (Anthropic), in Claude Code on my Mac.
+Transcript: ai_review_transcript_BenTucker.txt (same folder). Claude Code
+has no share link, so I copied the real excerpts there.
+I never pasted keys, passwords or tokens into the AI.
+
+
+QUESTION 1 - Can I run curl http://127.0.0.1:8000/status from my Mac?  (Excerpt 1)
+AI said (my words): I was trying to ask the bank to connect, but I asked
+my own Mac instead. 127.0.0.1 means "this computer," and the bank isn't on
+my Mac, so I can't do anything by asking my own computer. I have to ssh
+into the server first, then curl will work.
+How I checked: I ssh'd into the server and ran the same curl command
+there, and this time the bank answered instead of "Couldn't connect."
+
+
+QUESTION 2 - Does payment_post change the account balance?  (Excerpt 3)
+AI said (my words): No. payment_post only writes the payment in the
+journal (payments.dat), like a receipt. It doesn't update the ledger
+(accounts.dat), so the balance stays the same.
+How I checked: After TXN-BT-0003 for 125.50 said POSTED, I ran
+./cobol/bin/account_lookup 100001 and it still said 5000.00.
+
+
+QUESTION 3 - Why did POST /ask give me a 422 error?  (Excerpt 4)
+AI said (my words): I put "question" in twice, so the bank couldn't read
+my request. 422 means the request was the wrong shape, like a form that
+says "Name: Name: Ben."
+How I checked: I looked at the Curl box in Swagger and saw "question":
+two times. I cleared the Request body, typed it once, clicked Execute
+again, and got Code 200.
+
+
+QUESTION 4 - Does COBOL block a duplicate TXN ID?  (Excerpt 6)
+AI said (my words): No. This COBOL program doesn't check for duplicate
+TXN IDs, so if I post the same payment twice, both get POSTED. In a real
+bank that would charge someone two times.
+How I checked: I ran cat data/payments.dat and saw 2 identical lines for
+TXN-BT-0007 ... 12550 USD POSTED INV-1007. Theo showed the same thing in
+Saturday's class with TXN0001.
+
+
+QUESTION 5 - Will switching to Ghostty change anything?  (Excerpt 7)
+AI said (my words): On 10/31 the AI installed Ghostty and said everything
+was installed and tested. It only tested my Mac. It didn't warn me that
+the server wouldn't know Ghostty's terminal name.
+How I checked: On Run 7 (11/2) I typed clear on the server and got
+'xterm-ghostty': unknown terminal type. So the AI was wrong that nothing
+would change. The run still counted because the ID line was right.
+
+
+WHERE THE AI WAS WRONG OR VAGUE
+1. WRONG - Ghostty (Question 5): it said everything was tested, but it
+   never warned me about the server. clear failed on the server.
+2. VAGUE - the 422 error (Question 3): it told me to "replace only the
+   word string," but then showed me the whole JSON block. So I pasted the
+   whole line and "question" ended up in there twice.
