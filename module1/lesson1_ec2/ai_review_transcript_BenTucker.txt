@@ -1,0 +1,162 @@
+AI Review Transcript - Lesson 1 Runbook - Ben Tucker
+=====================================================
+
+AI used: Claude (Anthropic), through Claude Code in my Mac terminal.
+Claude Code chats don't make a share link, so these are excerpts copied from
+my real chat history while I did the practice reps and Lab 1 runs.
+
+Edits I made: I removed my home IP and AWS account number. Long answers are
+trimmed ("[...]"). Times are Mountain Time. No keys, passwords or tokens.
+
+
+------------------------------------------------------------
+EXCERPT 1 - Practice rep 3 - Thu 10/29, 8:55 PM
+Topic: Can I run curl 127.0.0.1 from my Mac?
+------------------------------------------------------------
+
+ME (pasted my Mac terminal):
+  ➜  ~ curl http://127.0.0.1:8000/status
+  curl: (7) Failed to connect to 127.0.0.1 port 8000 after 0 ms: Couldn't connect to server
+
+CLAUDE:
+  You ran curl on your Mac. Look at the start of the line: ➜ ~. On your
+  Mac, 127.0.0.1 means your Mac, and the bank isn't on your Mac. It's on
+  the server. You knocked on your own front door instead of walking over
+  to the bank's house first. [...] Go into the server first:
+  ssh -i ~/.ssh/seir-lab0-key.pem ec2-user@<server-ip>
+
+
+------------------------------------------------------------
+EXCERPT 2 - Run 1 - Fri 10/30, 7:25 PM
+Topic: Is the boot time from uptime -s real?
+------------------------------------------------------------
+
+ME: (pasted my lab1_run1 screenshot with the ID line)
+
+CLAUDE:
+  lab1_run1.jpg is perfect! Run 1 counts.
+  whoami: ec2-user
+  Date, your time zone: Fri Oct 30 19:21:04 MDT 2026
+  Instance ID: i-007852c4250891a7b
+  Boot time (UTC): 2026-10-31 01:05:54, 27 seconds before the screenshot
+  (Theo's rule: before, and within 24 hours)
+  Application startup complete.
+  [...]
+
+
+------------------------------------------------------------
+EXCERPT 3 - Run 3, COBOL practice - Fri 10/30, 8:02 PM
+Topic: Does payment_post change Alice's balance?
+------------------------------------------------------------
+
+ME: (pasted my cobol_rc0 screenshot: account_lookup 100001 showed
+     BALANCE=5000.00 after I had already posted TXN-BT-0003 for 125.50)
+
+CLAUDE:
+  Something interesting for your notes: Alice's balance still says
+  $5,000.00, even though you posted TXN-BT-0003 for $125.50 a few minutes
+  ago. So payment_post writes the payment in the journal but doesn't
+  change the ledger balance. Theo asks "did the balance change?", and
+  your answer is no.
+
+  [Later, for the ledger decode screenshot:]
+  grep ^100001 data/accounts.dat | cut -c45-56
+  [...] cut -c45-56 -> 000000500000 = $5,000.00
+
+
+------------------------------------------------------------
+EXCERPT 4 - Run 4 - Sat 10/31, 11:23 to 11:25 AM
+Topic: POST /ask gave a 422 error
+------------------------------------------------------------
+
+CLAUDE (the instruction before my mistake):
+  Click Try it out [...] Replace only the word string, keeping the quotes:
+  {
+    "question": "What is my balance?"
+  }
+  Click the big blue Execute bar.
+
+ME: (pasted my screenshot: Code 422, "JSON decode error",
+     "Expecting ',' delimiter")
+
+CLAUDE:
+  A 422 means the bank couldn't read the order slip. Look at the Curl box
+  at the top of your screenshot. Your request said:
+  "question": "question": "What is my balance?"
+  "question": appears twice. You pasted my whole line in place of just
+  the word string, so the label got doubled. It's like a form that says
+  Name: Name: Ben. [...]
+  Fix it: select everything in the Request body box, delete it, and type:
+  {
+    "question": "What is my balance?"
+  }
+
+ME: (pasted the new result: Code 200)
+
+
+------------------------------------------------------------
+EXCERPT 5 - Run 6 - Sat 10/31, about 8:25 PM
+Topic: A long command split into two lines
+------------------------------------------------------------
+
+ME (pasted):
+  [ec2-user@ip-172-31-21-248 balerica-bank]$ ./cobol/bin/payment_post TXN-BT-0007 100001
+  STATUS=REJECTED
+  REASON=MALFORMED REQUEST
+  USAGE=payment_post TXN ACCT AMOUNT CCY REF
+  [ec2-user@ip-172-31-21-248 balerica-bank]$ 125.50 USD INV-1007
+  -bash: 125.50: command not found
+  [ec2-user@ip-172-31-21-248 balerica-bank]$ cat data/payments.dat
+  [ec2-user@ip-172-31-21-248 balerica-bank]$
+
+CLAUDE:
+  The command broke into 2 lines again. Line 1: payment_post got only 2
+  pieces, but COBOL needs 5 (TXN, ACCT, AMOUNT, CCY, REF), so it answered
+  REJECTED / MALFORMED REQUEST. Line 2: bash thought 125.50 was a command.
+  cat data/payments.dat printed nothing, which proves nothing was saved.
+  Why it keeps happening: when you copy from my chat, the long line can
+  get a hidden Enter where the text wraps. Type it yourself.
+
+
+------------------------------------------------------------
+EXCERPT 6 - Run 6 - Sat 10/31, about 8:30 PM
+Topic: Does COBOL block a duplicate TXN ID?
+------------------------------------------------------------
+
+ME (pasted): I ran
+  ./cobol/bin/payment_post TXN-BT-0007 100001 125.50 USD INV-1007
+  two times, and both said STATUS=POSTED / REASON=APPROVED.
+
+CLAUDE:
+  You ran it twice. Both times it said POSTED, so the bank now has two
+  payments with the same ID, TXN-BT-0007. That's exactly what Theo showed
+  in Saturday's class: COBOL does not check for duplicate IDs. [...]
+  Look at the journal: cat data/payments.dat
+  You should see 2 lines with TXN-BT-0007 ... POSTED ... INV-1007.
+
+ME (pasted):
+  TXN-BT-0007         100001000000012550USDPOSTED  INV-1007
+  TXN-BT-0007         100001000000012550USDPOSTED  INV-1007
+
+
+------------------------------------------------------------
+EXCERPT 7 - Sat 10/31, about 9:30 PM, then Run 7 - Mon 11/2, 7:30 PM
+Topic: Switching to the Ghostty terminal
+------------------------------------------------------------
+
+[Sat 10/31: my brother told me to install Ghostty. Claude installed it,
+ set it up, and tested that my Mac commands still worked. Claude did
+ not say anything about it affecting the EC2 server.]
+
+CLAUDE (Sat 10/31, when it finished):
+  Everything is installed and tested. [...] claude, brew, aws and git
+  are all still found, so nothing fell off your PATH.
+
+ME (Mon 11/2, Run 7, pasted from Ghostty while ssh'd into the server):
+  (venv) [ec2-user@ip-172-31-21-125 balerica-bank]$ clear
+  'xterm-ghostty': unknown terminal type.
+
+CLAUDE:
+  That's because you used Ghostty. The server doesn't know Ghostty's
+  name yet, so clear didn't work. That's OK. The ID line is still right
+  before uvicorn, which is what Theo checks. I'll fix this for next time.

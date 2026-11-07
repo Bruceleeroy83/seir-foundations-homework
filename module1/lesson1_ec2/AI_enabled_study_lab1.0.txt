@@ -1,0 +1,132 @@
+AI-Enabled Study - Lab 1.0 - Ben Tucker
+=======================================
+Each topic: one paragraph (5+ sentences) in my own words, then 3 sources
+(1 reading, 1 video, 1 AI). Every number has its source and year.
+
+
+1. DATABASES
+------------
+
+A database is where the bank keeps its information safe and easy to find.
+SQL (relational) databases are tables with strict rules, like a
+spreadsheet where every row has the same columns. NoSQL databases are
+flexible, like sticky notes where each note can look different. Banks
+pick SQL because the numbers always need to add up, with no missing
+boxes. The relational idea came from Edgar F. Codd at IBM in 1970
+(Wikipedia, "Relational model"). PostgreSQL is the most-used database
+today: 55.6% of developers use it (Stack Overflow Developer Survey, 2025).
+PostgreSQL is free and reliable, but it is hard to spread across lots of
+servers. My bank lab's accounts.dat works like a SQL table, because every
+line has the same columns in the same spots, so cut -c45-56 always finds
+the balance.
+
+Sources:
+- Reading: AWS, "What's the Difference Between Relational and Non-Relational Databases?"
+- Video: IBM Technology, "SQL vs NoSQL"
+- AI: Claude (Anthropic), Claude Code, Nov 2026
+- Numbers: Stack Overflow Developer Survey 2025 (survey.stackoverflow.co/2025/technology);
+  Wikipedia, "Relational model" (Codd, 1970)
+
+
+2. COBOL
+--------
+
+COBOL is an old programming language that banks still use every day. It
+was made in 1959 by a committee called CODASYL, inspired by Grace Hopper's
+work, and the name means COmmon Business-Oriented Language (Wikipedia,
+"COBOL"). It reads almost like English, for example ADD AMOUNT TO BALANCE.
+There are still 220 billion lines of COBOL in use (Reuters, 2017). The
+number that surprised me most is that COBOL handles 95% of ATM swipes
+(Reuters, 2017), so almost every time someone uses an ATM, this old code
+runs. Banks keep it because it is too expensive to replace: Commonwealth
+Bank of Australia took 5 years and about $750 million to replace its COBOL
+core (Reuters, 2017). It is also getting harder to find people who know
+it, because many COBOL engineers are retiring. In my lab, account_lookup
+and payment_post are COBOL programs, and I saw that payment_post allowed
+duplicate TXN IDs, which in a real bank could charge someone twice.
+
+Sources:
+- Reading: Wikipedia, "COBOL"
+- Video: Fireship, "COBOL in 100 Seconds"
+- AI: Claude (Anthropic), Claude Code, Nov 2026
+- Numbers: Reuters, "COBOL blues" (2017), as cited by The New Stack,
+  "COBOL Everywhere" (thenewstack.io/cobol-everywhere-will-maintain)
+
+
+3. SWIFT
+--------
+
+SWIFT is like a mail service between banks. When a bank in one country
+sends money to a bank in another country, SWIFT carries the message that
+says who to pay and how much, not the money itself. It was started on
+3 May 1973 in Brussels, Belgium, by 239 banks in 15 countries, and it
+connected more than 11,000 institutions in over 200 countries
+(Wikipedia, "SWIFT", 2015 figure). The old message type for a customer
+payment is MT103, where each line has a code like :20: for the ID and
+:32A: for the date, currency and amount. In November 2025 banks switched
+to ISO 20022, because the old MT payment messages ended on 22 November
+2025 (Swift, ISO 20022 FAQ, 2025). The new pacs.008 message holds much
+more information than MT103. Competitors include CIPS in China and SPFS
+in Russia. In my lab, SWIFT payments changed Alice's balance, but COBOL
+payment_post didn't. In Run 5, 7 of 10 SWIFT payments were POSTED and 3
+were REJECTED, and Alice went from 5000.00 to 4777.98.
+
+Sources:
+- Reading: Wikipedia, "SWIFT"
+- Video: a16z, "Foreign Exchange 101"
+- AI: Claude (Anthropic), Claude Code, Nov 2026
+- Numbers: Wikipedia, "SWIFT" (1973 founding; 2015 member count);
+  Swift ISO 20022 FAQs (swift.com, 2025); Payment Expert, "Swift's
+  ISO 20022 cutover" (Nov 2025)
+
+
+4. APIs
+-------
+
+An API is like a waiter at a restaurant: one program asks for something,
+and the API brings back the answer, so you never walk into the kitchen
+yourself. API stands for Application Programming Interface, and REST APIs
+come from Roy Fielding's PhD paper in 2000 (Wikipedia, "REST"). APIs talk
+over HTTP, the same thing a web browser uses, and they send data as JSON,
+like {"question": "What is my balance?"}. GET shows you something, like
+Alice's balance at GET /accounts/100001, and POST does something, like
+sending a payment or asking a question at POST /ask. An API has to check
+the data it gets, because checks stop bad data from breaking things or
+letting attackers in, and broken checks are at the top of the OWASP API
+Security Top 10 (OWASP, 2023). I saw this in my lab when I typed
+"question" twice and the API answered 422, which means it checked my JSON
+and refused it. APIs are also how AI gets used, because the bank's /ask
+endpoint sends my question to an AI and returns the answer.
+
+Sources:
+- Reading: MDN Web Docs, "An overview of HTTP"
+- Video: IBM Technology, "What is a REST API?"
+- AI: Claude (Anthropic), Claude Code, Nov 2026
+- Numbers: Wikipedia, "REST" (Fielding, 2000); OWASP API Security Top 10 (2023)
+
+
+5. THE INTERSECTION
+-------------------
+
+Banks and governments use all four pieces together, and each one has a
+job: SWIFT brings letters, the API takes orders, COBOL does the math, and
+the database stores the balances. Instead of rewriting old COBOL, many
+places wrap it in an API so new apps and AI can use it, which is called
+going "from mainframe to API." This is a big deal for the government. In
+July 2025 the GAO picked the 11 federal legacy systems that most need
+modernizing, and 8 of the 11 use outdated languages like COBOL (GAO,
+GAO-25-107795, 2025). The number that stood out to me is that 7 of the 11
+have known security holes (GAO, 2025), which is scary for systems that
+handle things like taxes and payments. Of 10 old systems GAO flagged in
+2019, only 3 were modernized by February 2025 (GAO, 2025). This matters
+for banks, hospitals, schools and government, because they all run on
+old systems that people depend on every day. My bank lab had all of
+them: COBOL programs (account_lookup), an API in front (uvicorn and
+/docs), SWIFT messages coming in, data files (accounts.dat), and AI (/ask).
+
+Sources:
+- Reading: U.S. GAO, "Information Technology: Agencies Need to Plan for
+  Modernizing Critical Decades-Old Legacy Systems," GAO-25-107795 (July 2025)
+- Video: "Modernizing COBOL: From Mainframe to API"
+- AI: Claude (Anthropic), Claude Code, Nov 2026
+- Numbers: GAO-25-107795 (2025), gao.gov/products/GAO-25-107795

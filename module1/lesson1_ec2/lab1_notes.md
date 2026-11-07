@@ -80,6 +80,7 @@ TXN-BT-0004 ... REJECTED INV-1004
 **Did the balance change?** No. After posting `TXN-BT-0003` for 125.50, the ledger still said `000000500000`. `payment_post` writes the payment to the journal (`payments.dat`), but it does not update the ledger (`accounts.dat`).
 
 ## Mistakes I made
+- **My biggest pattern:** I made most of my mistakes by sending commands to the wrong place: a server command to my Mac, or a Mac command to the server. Now I check the prompt first (`➜` = my Mac, `[ec2-user@...]$` = the server).
 - Typed the placeholder `<paste-the-IP>` literally, then typed the example IP instead of my real one.
 - Long commands split into two lines (ssh and `payment_post`) because pasting added a hidden Enter.
 - Typed a JSON key twice in `/ask` → 422 error.
