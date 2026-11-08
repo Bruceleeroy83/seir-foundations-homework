@@ -33,6 +33,16 @@ Done on Run 3 (`i-062a1c9de9b6caa3c`) in `/opt/balerica-bank`. Details are in `l
 
 [git_clone.jpg](screenshots/git_clone.jpg): cloned this repo onto Run 3 and listed `module1`. Clone only, no push and no token on the server.
 
+## Other files
+
+| File | What |
+|---|---|
+| [lab1_notes.md](lab1_notes.md) | notes for all 7 runs, COBOL practice, Mistakes I made, Commands I now know by heart |
+| [ai_review_BenTucker.txt](ai_review_BenTucker.txt) | AI review of the runbook: 5 questions, how I checked each one, where the AI was wrong or vague |
+| [ai_review_transcript_BenTucker.txt](ai_review_transcript_BenTucker.txt) | transcript excerpts for the AI review |
+| [AI_enabled_study_lab1.0.txt](AI_enabled_study_lab1.0.txt) | Databases, COBOL, SWIFT, APIs and the intersection, with sources |
+| [Maarek_Section21_quiz.jpg](screenshots/Maarek_Section21_quiz.jpg) · [Section23](screenshots/Maarek_Section23_quiz.jpg) · [Section25](screenshots/Maarek_Section25_quiz.jpg) | Maarek quizzes |
+
 ## My notes
 
 - I've learned that if you just listen to Theo and do exactly what he tells us to do, we will be fine. I do get it though: one thing wrong and it won't work.
